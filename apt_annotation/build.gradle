@@ -4,7 +4,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 
-// java控制台输出中文乱码
+// 中文乱码问题（错误: 编码GBK的不可映射字符）
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }

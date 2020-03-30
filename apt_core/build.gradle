@@ -1,28 +1,36 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
+
+
     defaultConfig {
-        applicationId "com.update.bkdemo"
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+
+        consumerProguardFiles 'consumer-rules.pro'
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
-    annotationProcessor project(':apt_compiler')
-    implementation project(':apt_core')
+    // compile被废弃
+    // api：同compile
+    // implementation: 不会进行传递依赖
+    // 即 apt_annotation 模块只对 本模块(apt-core) 开放,
+    // 无法在 app 模块中使用
+    api project(':apt_annotation')
 }
