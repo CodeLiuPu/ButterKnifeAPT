@@ -1,2 +1,2 @@
-include ':app', ':apt_annotation'
+include ':app', ':apt_annotation', ':apt_compiler'
 rootProject.name = 'ButterKnifeAPT'
