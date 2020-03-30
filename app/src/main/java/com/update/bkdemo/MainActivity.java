@@ -13,7 +13,7 @@ import com.update.apt_annotation.BindView;
 public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.tv_content)
-    TextView tcContent;
+    TextView tvContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
