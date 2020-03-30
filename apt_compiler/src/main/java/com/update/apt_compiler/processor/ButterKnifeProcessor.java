@@ -135,12 +135,19 @@ public class ButterKnifeProcessor extends AbstractProcessor {
                 // 构造函数
                 MethodSpec.Builder constructorBuilder =
                         MethodSpec.constructorBuilder()
-                                .addParameter(activityClassName,"target")
-                        .addModifiers(Modifier.PUBLIC)
-                        // this.target = target
-                .addStatement("this.target = target");
+                                .addParameter(activityClassName, "target")
+                                .addModifiers(Modifier.PUBLIC)
+                                // this.target = target
+                                .addStatement("this.target = target");
 
-
+                for (VariableElement bindViewElement : bindViewElements) {
+                    // tvContent
+                    String fieldName = bindViewElement.getSimpleName().toString();
+                    // R.id.tv_content
+                    int resourceId = bindViewElement.getAnnotation(BindView.class).value();
+                    // target.tvContent = target.findViewById(R.id.tv_content)
+                    constructorBuilder.addStatement("target.$L = target.findViewById($L)", fieldName, resourceId);
+                }
 
                 classBuilder.addMethod(constructorBuilder.build());
 
